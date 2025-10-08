@@ -7,7 +7,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import MenuBar from "./Menubar";
 
 import { EditorContent } from "@tiptap/react";
-export default function RichTextEditor() {
+export default function RichTextEditor({ field }: any) {
   const editor = useEditor({
     extensions: [
       StarterKit,

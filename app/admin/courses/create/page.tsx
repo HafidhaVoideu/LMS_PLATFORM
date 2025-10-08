@@ -38,6 +38,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
+import Uploader from "@/components/file-uploader/Uploader";
 export default function CreateCoursePage() {
   const form = useForm<CourseSchemaType>({
     resolver: zodResolver(courseSchema),
@@ -169,7 +170,7 @@ export default function CreateCoursePage() {
                   <FormItem className="flex-1">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <RichTextEditor />
+                      <RichTextEditor field={field} />
                     </FormControl>
 
                     <FormMessage></FormMessage>
@@ -186,10 +187,12 @@ export default function CreateCoursePage() {
                     <FormLabel>Thumbnail image</FormLabel>
                     <FormControl>
                       <FormControl>
-                        <Input
+                        {/* <Input
                           placeholder="Thumbnail image URL..."
                           {...field}
-                        ></Input>
+                        ></Input> */}
+
+                        <Uploader />
                       </FormControl>
                     </FormControl>
 
