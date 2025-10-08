@@ -27,6 +27,13 @@ export default function LoginForm() {
         provider: "github",
         callbackURL: "/",
         fetchOptions: {
+          /*************  ✨ Windsurf Command ⭐  *************/
+          /**
+           * Called when the sign in request was successful.
+           *
+           * @param {object} res - the response from the server
+           */
+          /*******  81c02264-39c2-433a-8519-dcefe3fa75c2  *******/
           onSuccess: (res) => {
             toast.success("Signed in successfully! You will be redirected...");
           },
