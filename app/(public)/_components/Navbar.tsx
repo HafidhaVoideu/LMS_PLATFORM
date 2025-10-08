@@ -19,7 +19,7 @@ const NAV_ITEMS = [
     name: "Courses",
     href: "/courses",
   },
-  { name: "Dashboard", href: "/dashboard" },
+  { name: "Dashboard", href: "/admin" },
 ];
 
 export default function Navbar() {
@@ -52,9 +52,16 @@ export default function Navbar() {
 
           {isPending ? null : session ? (
             <UserDropdown
-              name={session.user.name}
+              name={
+                session?.user.name && session.user.name.length
+                  ? session.user.name
+                  : session?.user.email.split("@")[0]
+              }
               email={session.user.email}
-              image={session.user.image || ""}
+              image={
+                session?.user.image ??
+                `https://avatar.vercel.sh/${session?.user.email}`
+              }
             ></UserDropdown>
           ) : (
             <>
