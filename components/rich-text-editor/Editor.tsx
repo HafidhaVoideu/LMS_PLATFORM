@@ -7,7 +7,12 @@ import TextAlign from "@tiptap/extension-text-align";
 import MenuBar from "./Menubar";
 
 import { EditorContent } from "@tiptap/react";
-export default function RichTextEditor({ field }: any) {
+
+interface EditorProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+export default function RichTextEditor({ value, onChange }: EditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -15,6 +20,10 @@ export default function RichTextEditor({ field }: any) {
         types: ["heading", "paragraph"],
       }),
     ],
+    content: value, // Initialize with form value
+    onUpdate: ({ editor }) => {
+      onChange(editor.getHTML()); // Sync Tiptap → form
+    },
 
     immediatelyRender: false,
 

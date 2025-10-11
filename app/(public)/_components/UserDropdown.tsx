@@ -68,7 +68,7 @@ export default function UserDropdown({
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
-            <Link href="/courses">
+            <Link href="/admin/courses">
               <BookOpenIcon
                 size={16}
                 className="opacity-60"
@@ -79,7 +79,7 @@ export default function UserDropdown({
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">
+            <Link href="/admin">
               <LayoutDashboard
                 size={16}
                 className="opacity-60"

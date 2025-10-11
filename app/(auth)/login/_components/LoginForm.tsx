@@ -52,7 +52,6 @@ export default function LoginForm() {
       await authClient.emailOtp.sendVerificationOtp({
         email,
         type: "sign-in",
-
         fetchOptions: {
           onSuccess: () => {
             toast.success("Verification email sent! Please check your inbox.");

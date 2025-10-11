@@ -1,8 +1,10 @@
 import { cn } from "@/lib/utils";
-import { CloudUploadIcon } from "lucide-react";
+import { CloudUploadIcon, Loader2, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
 import { ImageIcon } from "lucide-react";
+
+import Image from "next/image";
 
 export function RenderEmptyState({ isDragActive }: { isDragActive: boolean }) {
   return (
@@ -42,7 +44,60 @@ export function RenderErrorState({}) {
 
       <p className="text-xs mt-1 text-muted-foreground">Somthing Went Wrong</p>
 
-      <Button className="mt-4">Retry File Selection</Button>
+      <Button type="button" className="mt-4">
+        Retry File Selection
+      </Button>
+    </div>
+  );
+}
+
+export function RenderUploaedState({
+  previewURL,
+  handleRemoveFile,
+  isDeleting,
+}: {
+  previewURL: string;
+  handleRemoveFile: () => void;
+  isDeleting: boolean;
+}) {
+  return (
+    <div className="w-full h-full relative">
+      <div className="w-[200px]  h-[200px] relative mx-auto">
+        <Image src={previewURL} alt="preview" fill className="object-cover" />
+      </div>
+
+      <Button
+        onClick={handleRemoveFile}
+        size="icon"
+        type="button"
+        variant="destructive"
+        className={cn("absolute top-0 right-0")}
+      >
+        {isDeleting ? (
+          <Loader2 className="animate-spin size-4" />
+        ) : (
+          <XIcon size={4} />
+        )}
+      </Button>
+    </div>
+  );
+}
+
+export function RenderUploafingState({
+  file,
+  progress,
+}: {
+  file: File;
+  progress: number;
+}) {
+  return (
+    <div className="text-center flex flex-col justify-center items-center">
+      <p>{progress}</p>
+      <p className="mt-2 text-sm text-foreground font-medium">Uploading...</p>
+
+      <p className="mt-1 text-xs text-muted-foreground truncate max-w-xs">
+        {file.name}
+      </p>
     </div>
   );
 }

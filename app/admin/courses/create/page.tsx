@@ -170,7 +170,10 @@ export default function CreateCoursePage() {
                   <FormItem className="flex-1">
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <RichTextEditor field={field} />
+                      <RichTextEditor
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
                     </FormControl>
 
                     <FormMessage></FormMessage>
@@ -187,12 +190,10 @@ export default function CreateCoursePage() {
                     <FormLabel>Thumbnail image</FormLabel>
                     <FormControl>
                       <FormControl>
-                        {/* <Input
-                          placeholder="Thumbnail image URL..."
-                          {...field}
-                        ></Input> */}
-
-                        <Uploader />
+                        <Uploader
+                          onChange={field.onChange}
+                          value={field.value}
+                        />
                       </FormControl>
                     </FormControl>
 

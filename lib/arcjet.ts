@@ -1,4 +1,6 @@
 import { env } from "./env";
+
+import "server-only";
 // import {shield, slidingWindoe} from "@arjet/next";
 import arcjet, {
   detectBot,
