@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "./db";
-import { emailOTP } from "better-auth/plugins";
+import { admin, emailOTP } from "better-auth/plugins";
 
 import { env } from "./env";
 import { resend } from "./resend";
@@ -27,5 +27,7 @@ export const auth = betterAuth({
         });
       },
     }),
+
+    admin(),
   ],
 });

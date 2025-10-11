@@ -6,14 +6,46 @@ import { v4 as uuidv4 } from "uuid";
 
 import { S3 } from "@/lib/S3Client";
 import { env } from "@/lib/env";
+import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import { Fingerprint } from "lucide-react";
+import { auth } from "@/lib/auth";
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { error: "File name is required" }),
   contentType: z.string().min(1, { error: "Content type is required" }),
   size: z.number().min(1, { error: "Size is required" }),
   isImage: z.boolean(),
 });
+import { headers } from "next/headers";
+import { requireAdmin } from "@/app/data/admin/require-admin";
+
+const aj = arcjet
+  .withRule(
+    detectBot({
+      mode: "LIVE",
+      allow: [],
+    })
+  )
+  .withRule(
+    fixedWindow({
+      mode: "LIVE",
+      max: 5,
+      window: "1m",
+    })
+  );
 export async function POST(req: Request) {
+  const session = await requireAdmin();
+
   try {
+    const decision = await aj.protect(req, {
+      fingerprint: session?.user.id as string,
+    });
+
+    if (decision.isDenied())
+      return NextResponse.json(
+        { error: "You have been blocked" },
+        { status: 403 }
+      );
+
     const body = await req.json();
 
     const validatedFile = fileUploadSchema.safeParse(body);

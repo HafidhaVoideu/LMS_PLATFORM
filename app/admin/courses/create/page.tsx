@@ -1,4 +1,6 @@
 "use client";
+import Uploader from "@/components/file-uploader/Uploader";
+import RichTextEditor from "@/components/rich-text-editor/Editor";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -8,28 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  courseCategories,
-  courseLevels,
-  CourseSchemaType,
-  courseStatus,
-} from "@/lib/zodSchemas";
-import { ArrowLeft, PlusIcon, SparkleIcon } from "lucide-react";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { courseSchema } from "@/lib/zodSchemas";
-
-import slugify from "slugify";
-import {
+  Form,
   FormControl,
   FormField,
   FormItem,
-  Form,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -37,9 +25,31 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import RichTextEditor from "@/components/rich-text-editor/Editor";
-import Uploader from "@/components/file-uploader/Uploader";
+import { Textarea } from "@/components/ui/textarea";
+import { tryCatch } from "@/hooks/use-try-catch";
+import {
+  courseCategories,
+  courseLevels,
+  courseSchema,
+  CourseSchemaType,
+  courseStatus,
+} from "@/lib/zodSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ArrowLeft, Loader2, PlusIcon, SparkleIcon } from "lucide-react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import slugify from "slugify";
+import { CreateCourse } from "./actions";
+
+import { useRouter } from "next/navigation";
+
+import { useTransition } from "react";
+import { toast } from "sonner";
 export default function CreateCoursePage() {
+  const router = useRouter();
+
+  const [pendingCourseCreation, startCourseCreationTransition] =
+    useTransition();
   const form = useForm<CourseSchemaType>({
     resolver: zodResolver(courseSchema),
     defaultValues: {
@@ -56,8 +66,24 @@ export default function CreateCoursePage() {
     },
   });
 
-  function onSubmit(values: CourseSchemaType) {
-    console.log(values);
+  async function onSubmit(values: CourseSchemaType) {
+    startCourseCreationTransition(async () => {
+      const { data: result, error } = await tryCatch(CreateCourse(values));
+
+      if (error) {
+        toast.error(error.message);
+      }
+
+      if (result?.status === "error") {
+        toast.error(result.message);
+      } else if (result?.status === "success") {
+        toast.success(result.message);
+        form.reset();
+        router.push("/admin/courses");
+      }
+    });
+
+    // console.log(values);
   }
 
   return (
@@ -341,8 +367,21 @@ export default function CreateCoursePage() {
                 )}
               ></FormField>
 
-              <Button type="submit" className="">
-                Create Course <PlusIcon className=" ml-1" size={16} />
+              <Button
+                type="submit"
+                className=""
+                disabled={pendingCourseCreation}
+              >
+                {pendingCourseCreation ? (
+                  <>
+                    Creating...
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  </>
+                ) : (
+                  <>
+                    Create Course <PlusIcon className=" ml-1" size={16} />
+                  </>
+                )}
               </Button>
             </form>
           </Form>
