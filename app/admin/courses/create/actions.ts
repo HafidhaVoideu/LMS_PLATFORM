@@ -32,17 +32,19 @@ export async function CreateCourse(
       fingerprint: session?.user.id as string,
     });
 
+    console.log("arcjet decision:", decision.isDenied());
     if (decision.isDenied()) {
       if (decision.reason.isRateLimit())
         return {
           status: "error",
+          message: "too many requests",
+        };
+      else {
+        return {
+          status: "error",
           message: "You have been blocked",
         };
-    } else {
-      return {
-        status: "error",
-        message: "You have been blocked",
-      };
+      }
     }
 
     const validatedData = courseSchema.safeParse(data);
@@ -54,7 +56,7 @@ export async function CreateCourse(
       };
     }
 
-    const dataPrisma = prisma.course.create({
+    const dataPrisma = await prisma.course.create({
       data: {
         ...validatedData.data,
         userId: session?.user.id as string,
