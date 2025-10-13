@@ -37,7 +37,7 @@ export const courseSchema = z.object({
   smallDescription: z
     .string()
     .min(3, { error: "Small description must be at least 3 characters" })
-    .max(200, { error: "Small description must be less than 200 characters" }),
+    .max(300, { error: "Small description must be less than 200 characters" }),
   slug: z.string().min(3, { error: "Slug must be at least 3 characters" }),
   status: z.enum(courseStatus, { error: "Status is required" }),
 });
