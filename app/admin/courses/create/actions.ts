@@ -25,9 +25,8 @@ export async function CreateCourse(
 ): Promise<ResponseObjectType> {
   const session = await requireAdmin();
 
-  const req = await request();
-
   try {
+    const req = await request();
     const decision = await aj.protect(req, {
       fingerprint: session?.user.id as string,
     });

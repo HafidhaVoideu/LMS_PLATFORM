@@ -21,6 +21,25 @@ export async function adminGetCourse(id: string) {
       fileKey: true,
       category: true,
       description: true,
+
+      chapters: {
+        select: {
+          id: true,
+          title: true,
+          position: true,
+
+          lessons: {
+            select: {
+              id: true,
+              description: true,
+              thumbnailKey: true,
+              videoKey: true,
+              title: true,
+              position: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -28,4 +47,4 @@ export async function adminGetCourse(id: string) {
   return data;
 }
 
-export type AdminCourseEditType = Awaited<ReturnType<typeof adminGetCourse>>;
+export type AdminSingleCourseType = Awaited<ReturnType<typeof adminGetCourse>>;

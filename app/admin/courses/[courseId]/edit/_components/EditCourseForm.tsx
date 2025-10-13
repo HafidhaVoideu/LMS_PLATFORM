@@ -35,7 +35,7 @@ import slugify from "slugify";
 
 import { useRouter } from "next/navigation";
 
-import { AdminCourseEditType } from "@/app/data/admin/admin-get-course";
+import { AdminSingleCourseType } from "@/app/data/admin/admin-get-course";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { EditCourse } from "../actions";
@@ -44,7 +44,7 @@ export default function EditCourseForm({
   data,
 }: {
   courseId: string;
-  data: AdminCourseEditType;
+  data: AdminSingleCourseType;
 }) {
   const router = useRouter();
 

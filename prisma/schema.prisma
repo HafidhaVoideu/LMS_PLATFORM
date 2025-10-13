@@ -97,8 +97,48 @@ model Course {
   status           CourseStatus @default(Draft)
   userId           String
   user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  chapters Chapter[]
 }
 
+
+
+model Lesson {
+  id               String       @id @default(uuid())
+
+  title String
+  description String?
+  videoKey String
+  thumbnailKey String
+    createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  position Int
+
+  chapterId           String
+chapter         Chapter       @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+
+}
+
+
+
+model Chapter{
+  id               String       @id @default(uuid())
+  title String
+
+
+  position Int
+    createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  course             Course     @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String
+
+  lessons  Lesson []
+
+
+
+}
 enum CourseLevel {
   Beginner
   Intermediate
