@@ -8,8 +8,10 @@ import {
   PointerSensor,
   rectIntersection,
   useSensor,
+  DragEndEvent,
   useSensors,
 } from "@dnd-kit/core";
+
 import {
   arrayMove,
   SortableContext,
@@ -92,7 +94,7 @@ export default function EditCourseStructure({
         ref={setNodeRef}
         style={style}
         {...attributes}
-        {...listeners}
+        // {...listeners}
         className={cn("touch-none", className, isDragging ? "z-10" : "")}
       >
         {children(listeners)}
@@ -100,15 +102,15 @@ export default function EditCourseStructure({
     );
   }
 
-  function handleDragEnd(event) {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
+    if (!over) return; // guard
     if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
-
-        return arrayMove(items, oldIndex, newIndex);
+      setItems((prev) => {
+        const oldIndex = prev.findIndex((i) => i.id === active.id);
+        const newIndex = prev.findIndex((i) => i.id === over.id);
+        return arrayMove(prev, oldIndex, newIndex);
       });
     }
 
