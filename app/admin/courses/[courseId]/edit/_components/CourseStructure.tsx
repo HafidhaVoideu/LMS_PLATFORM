@@ -3,16 +3,15 @@ import { AdminSingleCourseType } from "@/app/data/admin/admin-get-course";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   DndContext,
+  DragEndEvent,
   DraggableSyntheticListeners,
   KeyboardSensor,
   PointerSensor,
   rectIntersection,
   useSensor,
-  DragEndEvent,
   useSensors,
 } from "@dnd-kit/core";
 
-import { toast } from "sonner";
 import {
   arrayMove,
   SortableContext,
@@ -22,24 +21,28 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 import {
   ChevronDown,
   ChevronRight,
-  DeleteIcon,
   FileText,
   GripVertical,
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
 import { reorderChapters, reorderLessons } from "../actions";
+import NewChapterModal from "./NewChapterModal";
+import NewLessonModal from "./NewLessonModal";
+import DeleteLesson from "./DeleteLesson";
+import DeleteChapter from "./DeleteChapter";
 interface EditCoutseStructureProps {
   data: AdminSingleCourseType;
 }
@@ -308,6 +311,8 @@ export default function EditCourseStructure({
       <Card>
         <CardHeader className="flex flex-row items-center justify-between border-b border-border">
           <CardTitle>Course Structure</CardTitle>
+
+          <NewChapterModal courseId={data.id} />
         </CardHeader>
         <CardContent className="space-y-8">
           <SortableContext strategy={verticalListSortingStrategy} items={items}>
@@ -349,9 +354,9 @@ export default function EditCourseStructure({
                           </p>
                         </div>
 
-                        <Button size="icon" variant="outline">
-                          <Trash2 className="size-4" />
-                        </Button>
+                        <DeleteChapter chapterId={item.id} courseId={data.id} />
+
+                        {/* <DeleteLesson  lessonId={}"/> */}
                       </div>
 
                       {/* collapsible component */}
@@ -388,9 +393,11 @@ export default function EditCourseStructure({
                                         {lesson.title}
                                       </Link>
                                     </div>
-                                    <Button variant="outline" size="icon">
-                                      <Trash2 className="size-4" />
-                                    </Button>
+                                    <DeleteLesson
+                                      lessonId={lesson.id}
+                                      chapterId={item.id}
+                                      courseId={data.id}
+                                    />
                                   </div>
                                 )}
                               </SortableItem>
@@ -398,9 +405,10 @@ export default function EditCourseStructure({
                           </SortableContext>
 
                           <div className="p-2">
-                            <Button variant="outline" className="w-full">
-                              Create a new lesson
-                            </Button>
+                            <NewLessonModal
+                              courseId={data.id}
+                              chapterId={item.id}
+                            ></NewLessonModal>
                           </div>
                         </div>
                       </CollapsibleContent>
