@@ -45,11 +45,14 @@ import { useRouter } from "next/navigation";
 
 import { useTransition } from "react";
 import { toast } from "sonner";
+import { useConfetti } from "@/hooks/use-conffeti";
 export default function CreateCoursePage() {
   const router = useRouter();
 
   const [pendingCourseCreation, startCourseCreationTransition] =
     useTransition();
+
+  const { triggerConfetti } = useConfetti();
   const form = useForm<CourseSchemaType>({
     resolver: zodResolver(courseSchema),
     defaultValues: {
@@ -78,6 +81,7 @@ export default function CreateCoursePage() {
         toast.error(result.message);
       } else if (result?.status === "success") {
         toast.success(result.message);
+        triggerConfetti();
         form.reset();
         router.push("/admin/courses");
       }

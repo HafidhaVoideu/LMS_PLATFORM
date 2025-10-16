@@ -21,6 +21,7 @@ import {
   Trash2,
 } from "lucide-react";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface AdminCourseCardProps {
   data: AdminCourseType;
@@ -116,6 +117,39 @@ export default function AdminCourseCard({ data }: AdminCourseCardProps) {
         >
           Edit course <ArrowRight className="size-4" />
         </Link>
+      </CardContent>
+    </Card>
+  );
+}
+
+export function AdminCourseCardSkeleton() {
+  return (
+    <Card className="group relative py-0 gap-0">
+      <div className="absolute top-2 right-2 z-10 flex items-center gap-2">
+        {/* <Skeleton className="h-16 w-16 rounded-full"></Skeleton> */}
+        <Skeleton className="size-8 rouned-md"></Skeleton>
+      </div>
+
+      <div className="w-full relative h-fit">
+        <Skeleton className="w-full rounded-t-lg aspect-video h-[250px] object-cover"></Skeleton>
+      </div>
+
+      <CardContent className="p-4">
+        <Skeleton className="h-6 w-3/4 mb-2 rounded"></Skeleton>
+        <Skeleton className="h-4 w-full mb-4 rounded"></Skeleton>
+
+        <div className="mt-4 flex items-center gap-x-5">
+          <div className="flex items-center gap-x-2">
+            <Skeleton className="size-6  rounded-md"></Skeleton>
+            <Skeleton className=" h-4 w-10 "></Skeleton>
+          </div>
+          <div className="flex items-center gap-x-2">
+            <Skeleton className="size-6  rounded-md"></Skeleton>
+            <Skeleton className=" h-4 w-10 "></Skeleton>
+          </div>
+        </div>
+
+        <Skeleton className=" mt-4 h-10 w-full rounded"></Skeleton>
       </CardContent>
     </Card>
   );
