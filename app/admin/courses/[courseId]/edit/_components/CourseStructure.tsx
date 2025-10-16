@@ -387,7 +387,7 @@ export default function EditCourseStructure({
                                       <FileText className="size-4"></FileText>
 
                                       <Link
-                                        href={`/admin/courses/${data.id}/${item.id}/${lesson.id}/edit`}
+                                        href={`/admin/courses/${data.id}/${item.id}/${lesson.id}`}
                                         className="cursor-pointer hover:text-primary"
                                       >
                                         {lesson.title}

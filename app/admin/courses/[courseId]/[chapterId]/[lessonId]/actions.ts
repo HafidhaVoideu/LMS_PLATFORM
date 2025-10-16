@@ -1,5 +1,10 @@
 "use server";
-import { courseSchema, CourseSchemaType } from "@/lib/zodSchemas";
+import {
+  courseSchema,
+  CourseSchemaType,
+  lessonSchema,
+  LessonSchemaType,
+} from "@/lib/zodSchemas";
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { prisma } from "@/lib/db";
 import { ResponseObjectType } from "@/lib/types";
@@ -20,8 +25,9 @@ const aj = arcjet
       window: "1m",
     })
   );
-export async function CreateCourse(
-  data: CourseSchemaType
+export async function updateLesson(
+  data: LessonSchemaType,
+  lessonId: string
 ): Promise<ResponseObjectType> {
   const session = await requireAdmin();
 
@@ -45,7 +51,7 @@ export async function CreateCourse(
       }
     }
 
-    const validatedData = courseSchema.safeParse(data);
+    const validatedData = lessonSchema.safeParse(data);
 
     if (!validatedData.success) {
       return {
@@ -54,18 +60,24 @@ export async function CreateCourse(
       };
     }
 
-    const dataPrisma = await prisma.course.create({
+    const dataPrisma = await prisma.lesson.update({
+      where: {
+        id: lessonId,
+      },
       data: {
-        ...validatedData.data,
-        userId: session?.user.id as string,
+        description: validatedData.data.description,
+        title: validatedData.data.title,
+        videoKey: validatedData.data.videoKey,
+        thumbnailKey: validatedData.data.thumbnailKey,
       },
     });
 
     return {
       status: "success",
-      message: "course created successfully",
+      message: "lesson updated successfully",
     };
   } catch (e) {
+    console.log("error:", e);
     return {
       status: "error",
       message: "error validating data",

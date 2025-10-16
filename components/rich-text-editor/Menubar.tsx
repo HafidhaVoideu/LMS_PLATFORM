@@ -43,8 +43,7 @@ export default function MenuBar({ editor }: MenubarProps) {
                   editor.chain().focus().toggleBold().run();
                 }}
                 className={cn(
-                  editor.isActive("bold") &&
-                    "bg-orange-800 text-muted-foreground"
+                  editor.isActive("italic") && "bg-muted text-muted-foreground"
                 )}
               >
                 <Bold />

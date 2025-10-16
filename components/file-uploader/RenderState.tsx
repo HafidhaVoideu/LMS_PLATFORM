@@ -53,18 +53,27 @@ export function RenderErrorState({}) {
 
 export function RenderUploaedState({
   previewURL,
+  fileType,
   handleRemoveFile,
+
   isDeleting,
 }: {
+  fileType: "image" | "video";
   previewURL: string;
   handleRemoveFile: () => void;
   isDeleting: boolean;
 }) {
   return (
-    <div className="w-full h-full relative">
-      <div className="w-[200px]  h-[200px] relative mx-auto">
+    <div className="h-full w-full  max-w-[700px] flex items-center   justify-center relative mx-auto">
+      {fileType == "video" ? (
+        <video
+          src={previewURL}
+          controls
+          className="w-full h-full object-cover rounded-md"
+        />
+      ) : (
         <Image src={previewURL} alt="preview" fill className="object-cover" />
-      </div>
+      )}
 
       <Button
         onClick={handleRemoveFile}
