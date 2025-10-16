@@ -347,10 +347,8 @@ export async function deleteLesson(
       };
     const lessons = chapter.lessons;
 
-    console.log("lessons:", lessons);
     const lessonToDelete = lessons.find((lesson) => lesson.id === lessonId);
 
-    console.log("lesson to delete:", lessonToDelete);
     if (!lessonToDelete)
       return {
         status: "error",

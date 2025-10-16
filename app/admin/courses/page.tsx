@@ -7,8 +7,6 @@ import AdminCourseCard, {
 import { EmptyState } from "@/components/general/EmptyState";
 import { Suspense } from "react";
 export default async function CoursesPage() {
-  const data = await adminGetCourses();
-
   return (
     <div>
       <div className="flex items-center justify-between ">

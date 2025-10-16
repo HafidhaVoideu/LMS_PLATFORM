@@ -60,7 +60,7 @@ export default function EditCourseForm({
       duration: data?.duration,
       level: data?.level,
       category: data?.category as CourseSchemaType["category"],
-      smallDescription: data?.description,
+      smallDescription: data?.smallDescription,
       slug: data?.slug,
       status: data?.status,
     },
@@ -185,7 +185,11 @@ export default function EditCourseForm({
               <FormLabel>Thumbnail image</FormLabel>
               <FormControl>
                 <FormControl>
-                  <Uploader onChange={field.onChange} value={field.value} />
+                  <Uploader
+                    fileTypeAccepted="image"
+                    onChange={field.onChange}
+                    value={field.value}
+                  />
                 </FormControl>
               </FormControl>
 

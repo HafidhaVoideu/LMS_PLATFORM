@@ -17,7 +17,7 @@ const NAV_ITEMS = [
 
   {
     name: "Courses",
-    href: "/admin/courses",
+    href: "/courses",
   },
   { name: "Dashboard", href: "/admin" },
 ];
