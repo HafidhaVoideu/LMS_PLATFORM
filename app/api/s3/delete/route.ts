@@ -5,22 +5,15 @@ import { requireAdmin } from "@/app/data/admin/require-admin";
 import arcjet from "@/lib/arcjet";
 import { env } from "@/lib/env";
 import { S3 } from "@/lib/S3Client";
-import { detectBot, fixedWindow } from "@arcjet/next";
+import { fixedWindow } from "@arcjet/next";
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      max: 5,
-      window: "1m",
-    })
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    max: 5,
+    window: "1m",
+  })
+);
 export async function DELETE(request: Request) {
   const session = await requireAdmin();
   try {

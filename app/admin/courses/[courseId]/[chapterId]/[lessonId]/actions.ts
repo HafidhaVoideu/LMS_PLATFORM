@@ -1,30 +1,18 @@
 "use server";
-import {
-  courseSchema,
-  CourseSchemaType,
-  lessonSchema,
-  LessonSchemaType,
-} from "@/lib/zodSchemas";
 import { requireAdmin } from "@/app/data/admin/require-admin";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { prisma } from "@/lib/db";
 import { ResponseObjectType } from "@/lib/types";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import { lessonSchema, LessonSchemaType } from "@/lib/zodSchemas";
 import { request } from "@arcjet/next";
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      max: 5,
-      window: "1m",
-    })
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    max: 5,
+    window: "1m",
+  })
+);
 export async function updateLesson(
   data: LessonSchemaType,
   lessonId: string

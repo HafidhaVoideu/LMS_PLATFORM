@@ -6,7 +6,7 @@ import z from "zod";
 
 import { requireAdmin } from "@/app/data/admin/require-admin";
 import { S3 } from "@/lib/S3Client";
-import arcjet, { detectBot, fixedWindow } from "@/lib/arcjet";
+import arcjet, { fixedWindow } from "@/lib/arcjet";
 import { env } from "@/lib/env";
 export const fileUploadSchema = z.object({
   fileName: z.string().min(1, { error: "File name is required" }),
@@ -15,20 +15,13 @@ export const fileUploadSchema = z.object({
   isImage: z.boolean(),
 });
 
-const aj = arcjet
-  .withRule(
-    detectBot({
-      mode: "LIVE",
-      allow: [],
-    })
-  )
-  .withRule(
-    fixedWindow({
-      mode: "LIVE",
-      max: 5,
-      window: "1m",
-    })
-  );
+const aj = arcjet.withRule(
+  fixedWindow({
+    mode: "LIVE",
+    max: 5,
+    window: "1m",
+  })
+);
 export async function POST(req: Request) {
   const session = await requireAdmin();
 

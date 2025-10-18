@@ -1,7 +1,11 @@
 import { publicGetCourse } from "@/app/data/course/course-get-course";
 import RenderDescription from "@/components/rich-text-editor/RenderDescriiption";
 import { Badge } from "@/components/ui/badge";
-import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/lib/env";
 import {
@@ -14,14 +18,18 @@ import {
 import Image from "next/image";
 type params = Promise<{ slug: string }>;
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CollapsibleContent } from "@radix-ui/react-collapsible";
 import { CheckIcon } from "lucide-react";
+import { enrollInCourseAction } from "./action";
+import { checkIfCourseIsBought } from "@/app/data/user/user-is-enriolled";
+import Link from "next/link";
+import EnrolmentButton from "./_components/EnrolmentButton";
 export default async function SlugPage({ params }: { params: params }) {
   const { slug } = await params;
 
   const course = await publicGetCourse(slug);
+  const isEnrolled = await checkIfCourseIsBought(course.id);
 
   console.log("course description:", course.description);
   return (
@@ -35,8 +43,8 @@ export default async function SlugPage({ params }: { params: params }) {
             priority
             className="object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
 
         <div className="mt-8 space-y-6">
           <div className="space-y-4">
@@ -172,7 +180,7 @@ export default async function SlugPage({ params }: { params: params }) {
 
       {/* enrollement cart */}
 
-      <div className="order-2 lg-col-span-1 ">
+      <div className="order-2 lg:col-span-1">
         <div className="stikcy top-20">
           <Card className="py-0">
             <CardContent className="p-6">
@@ -286,10 +294,19 @@ export default async function SlugPage({ params }: { params: params }) {
                 </ul>
               </div>
 
-              <Button className="w-full">Enroll now ! </Button>
+              {isEnrolled ? (
+                <Link
+                  className={buttonVariants({ className: "w-full" })}
+                  href="/dashboard"
+                >
+                  Watch Course
+                </Link>
+              ) : (
+                <EnrolmentButton courseId={course.id}></EnrolmentButton>
+              )}
 
               <p className="mt-3 text-center text-xs text-muted-foreground">
-                30-daymoneyback guaranteed
+                30-day money back guaranteed
               </p>
             </CardContent>
           </Card>
