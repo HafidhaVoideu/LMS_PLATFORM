@@ -17,7 +17,7 @@ export default function NotAdminPage() {
           <div className="bg-destructive/10 rounded-full p-4 w-fit mx-auto">
             <ShieldX className="size-16 text-destructive" />
           </div>
-          <CardTitle className="text-2xl">Acess Restricted</CardTitle>
+          <CardTitle className="text-2xl">Access Restricted</CardTitle>
           <CardDescription className="max-w-xs mx-auto">
             You do not have access to this page
           </CardDescription>

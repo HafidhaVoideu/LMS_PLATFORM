@@ -150,7 +150,6 @@ export default function Uploader({
 
             reject(new Error("Error uploading file"));
           };
-          console.log("before putting");
 
           xhr.open("PUT", presignedUrl);
           xhr.setRequestHeader("Content-Type", file.type);

@@ -31,7 +31,6 @@ export default async function SlugPage({ params }: { params: params }) {
   const course = await publicGetCourse(slug);
   const isEnrolled = await checkIfCourseIsBought(course.id);
 
-  console.log("course description:", course.description);
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 mt-4">
       <div className="order-1 lg:col-span-2">
@@ -307,6 +306,10 @@ export default async function SlugPage({ params }: { params: params }) {
 
               <p className="mt-3 text-center text-xs text-muted-foreground">
                 30-day money back guaranteed
+              </p>
+              <p className="mt-3 text-center text-xs text-destructive">
+                Card number for testing: 4242 4242 4242 4242. <br /> You can use
+                a random future date and CVC.
               </p>
             </CardContent>
           </Card>

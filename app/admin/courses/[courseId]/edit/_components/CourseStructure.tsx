@@ -99,7 +99,6 @@ export default function EditCourseStructure({
     });
   }, [data]);
 
-  console.log("items:", items);
   function SortableItem({ children, id, className, data }: SortableItemProps) {
     const {
       attributes,

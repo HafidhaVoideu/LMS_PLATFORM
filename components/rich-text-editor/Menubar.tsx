@@ -27,7 +27,7 @@ interface MenubarProps {
 export default function MenuBar({ editor }: MenubarProps) {
   if (!editor) return null;
 
-  console.log("editor:", editor.isActive("bold"));
+  );
   return (
     <div className="border border-input  border-t-0 border-x-0 rounded-t-lg  p-2 bg-card flex flex-wrap items-center gap-1 ">
       <TooltipProvider>

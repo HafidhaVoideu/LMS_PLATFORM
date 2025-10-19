@@ -63,7 +63,6 @@ export default function NewChapterModal({ courseId }: { courseId: string }) {
         // router.push("/admin/courses");
       }
     });
-    console.log(values);
   }
   return (
     <Dialog open={isOpen} onOpenChange={handleIsOpen}>

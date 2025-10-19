@@ -32,7 +32,6 @@ export default function VerifyRequestPage() {
   const email = params.get("email");
   const isOptComplete = opt.length === 6;
 
-  console.log("OTP entered:", opt);
   async function verifyEmail() {
     startEmailVerificationTransition(async () => {
       await authClient.signIn.emailOtp({
@@ -51,7 +50,6 @@ export default function VerifyRequestPage() {
             },
 
           onError: (error) => {
-            console.log("Error verifying email OTP:", error);
             toast.error("Failed to verify email. Please try again.");
           },
         },

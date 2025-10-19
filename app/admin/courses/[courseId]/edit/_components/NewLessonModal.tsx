@@ -70,7 +70,6 @@ export default function NewLessonModal({
         // router.push("/admin/courses");
       }
     });
-    console.log(values);
   }
   return (
     <Dialog open={isOpen} onOpenChange={handleIsOpen}>

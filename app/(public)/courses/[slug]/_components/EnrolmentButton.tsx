@@ -12,16 +12,11 @@ export default function EnrolmentButton({ courseId }: { courseId: string }) {
   const [pendingCourseEnrollment, startCourseEnrollmentTransition] =
     useTransition();
 
-  console.log("button enrollment");
   async function onSubmit() {
-    console.log("submit clicked");
-
     startCourseEnrollmentTransition(async () => {
       const { data: result, error } = await tryCatch(
         enrollInCourseAction(courseId)
       );
-
-      console.log(result);
 
       if (error) {
         toast.error(error.message);

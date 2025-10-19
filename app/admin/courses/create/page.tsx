@@ -87,7 +87,7 @@ export default function CreateCoursePage() {
       }
     });
 
-    // console.log(values);
+    //
   }
 
   return (

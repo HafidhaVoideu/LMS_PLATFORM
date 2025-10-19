@@ -65,7 +65,6 @@ export async function updateLesson(
       message: "lesson updated successfully",
     };
   } catch (e) {
-    console.log("error:", e);
     return {
       status: "error",
       message: "error validating data",

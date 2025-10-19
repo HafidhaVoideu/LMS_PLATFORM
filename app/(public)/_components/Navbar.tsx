@@ -19,11 +19,13 @@ const NAV_ITEMS = [
     name: "Courses",
     href: "/courses",
   },
-  { name: "Dashboard", href: "/admin" },
+  { name: "Dashboard", href: "/dashboard" },
+  { name: "Admin", href: "/admin" },
 ];
 
 export default function Navbar() {
   const { data: session, isPending } = authClient.useSession();
+
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-[backdrop-filter]:bg-background/60 border-b">
       <div className="flex container min-h-16 items-center mx-auto px-4 md:px-6 lg:px-8">
@@ -34,7 +36,7 @@ export default function Navbar() {
 
         {/* desktop element */}
         <nav className="hidden md:flex md:flex-1 md:items-center md:justify-between">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.name}

@@ -136,14 +136,13 @@ export async function enrollInCourseAction(
 
         line_items: [
           {
-            price: "price_1SJMfBGB0No3Uqr50FpeM7rC",
-            //  price_data: {
-            //    currency: "usd",
-            //    product_data: {
-            //      name: course.title,
-            //    },
-            //    unit_amount: course.price * 100,
-            //  },
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: course.title,
+              },
+              unit_amount: course.price * 100,
+            },
             quantity: 1,
           },
         ],

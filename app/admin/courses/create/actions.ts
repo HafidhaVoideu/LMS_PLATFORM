@@ -59,7 +59,6 @@ export async function CreateCourse(
       },
     });
 
-    console.log("product stripe:", product);
     const dataPrisma = await prisma.course.create({
       data: {
         ...validatedData.data,
@@ -68,15 +67,11 @@ export async function CreateCourse(
       },
     });
 
-    console.log("data prisma:", dataPrisma);
-
     return {
       status: "success",
       message: "course created successfully",
     };
   } catch (e) {
-    console.log("error", e);
-
     // ✅ Handle specific known error types
     if (e instanceof Stripe.errors.StripeError) {
       return {

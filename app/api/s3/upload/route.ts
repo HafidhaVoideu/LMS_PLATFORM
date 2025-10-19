@@ -40,8 +40,6 @@ export async function POST(req: Request) {
 
     const validatedFile = fileUploadSchema.safeParse(body);
 
-    console.log("validated file:", validatedFile);
-
     if (!validatedFile.success)
       return NextResponse.json(
         { error: "File validation has failed" },
@@ -62,7 +60,6 @@ export async function POST(req: Request) {
       expiresIn: 360,
     });
 
-    console.log("presignedUrl", presignedUrl);
     const response = {
       presignedUrl,
       key: uniqueKey,
@@ -75,5 +72,5 @@ export async function POST(req: Request) {
       { status: 400 }
     );
   }
-  // console.log(bodu);
+  //
 }

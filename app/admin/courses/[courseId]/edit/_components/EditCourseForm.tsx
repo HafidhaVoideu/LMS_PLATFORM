@@ -85,7 +85,7 @@ export default function EditCourseForm({
       }
     });
 
-    // console.log(values);
+    //
   }
   return (
     <Form {...form}>

@@ -34,6 +34,8 @@ model User {
   banExpires DateTime?
   enrollment Enrolment[]
 
+  lessonProgress LessonProgress[]
+
 
   @@unique([email])
   @@map("user")
@@ -121,6 +123,8 @@ model Lesson {
 
   position Int
 
+   lessonProgress LessonProgress[]
+
   chapterId           String
 chapter         Chapter       @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 
@@ -149,8 +153,8 @@ model Enrolment {
    id               String       @id @default(uuid())
    amount Int
   createdAt        DateTime     @default(now())
-  status EnrolmentStatus @default(Pending)
   updatedAt        DateTime     @updatedAt
+  status EnrolmentStatus @default(Pending)
     courseId           String
 course           Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
@@ -177,4 +181,18 @@ enum EnrolmentStatus {
   Cancelled
   Active
   Pending
+}
+
+model LessonProgress {
+   id String @id @default(uuid())
+   completed Boolean @default(false)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+    userId           String
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    lessonId           String
+  lesson            Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+    @@unique([userId, lessonId])
 }

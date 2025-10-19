@@ -9,17 +9,23 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/client";
-import { GithubIcon, Loader, SendIcon } from "lucide-react";
-import { useState, useTransition } from "react";
+import { GithubIcon, Loader, SendIcon, Inbox } from "lucide-react";
+import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
 
 import { useRouter } from "next/navigation";
 export default function LoginForm() {
   const [isGithubLoading, githubStartTransition] = useTransition();
+  const [isGoogleLoading, googleStartTransition] = useTransition();
   const [isEmailLoading, emailStartTransition] = useTransition();
   const [email, setEmail] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    toast.info(
+      "Please Use Google or Github to login. You can use email only in Development."
+    );
+  }, []);
   // sign in with github
   const signInWithGithub = async () => {
     githubStartTransition(async () => {
@@ -27,13 +33,22 @@ export default function LoginForm() {
         provider: "github",
         callbackURL: "/",
         fetchOptions: {
-          /*************  ✨ Windsurf Command ⭐  *************/
-          /**
-           * Called when the sign in request was successful.
-           *
-           * @param {object} res - the response from the server
-           */
-          /*******  81c02264-39c2-433a-8519-dcefe3fa75c2  *******/
+          onSuccess: (res) => {
+            toast.success("Signed in successfully! You will be redirected...");
+          },
+          onError: (error) => {
+            toast.error("internal server error: ");
+          },
+        },
+      });
+    });
+  };
+  const signInWithGoogle = async () => {
+    googleStartTransition(async () => {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+        fetchOptions: {
           onSuccess: (res) => {
             toast.success("Signed in successfully! You will be redirected...");
           },
@@ -91,6 +106,24 @@ export default function LoginForm() {
             <>
               <GithubIcon className="size-4"></GithubIcon>
               sign in with Github
+            </>
+          )}
+        </Button>
+        <Button
+          disabled={isGoogleLoading}
+          onClick={signInWithGoogle}
+          className="w-full"
+          variant="outline"
+        >
+          {isGoogleLoading ? (
+            <>
+              <Loader className="size-4 animate-spin"></Loader>
+              loading...
+            </>
+          ) : (
+            <>
+              <Inbox className="size-4"></Inbox>
+              sign in with Google
             </>
           )}
         </Button>

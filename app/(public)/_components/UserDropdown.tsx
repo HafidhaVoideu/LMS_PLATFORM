@@ -24,7 +24,7 @@ import { useSignout } from "@/hooks/use-signout";
 interface UserdropdownProps {
   name: String;
   email: String;
-  image: String;
+  image: string;
 }
 
 export default function UserDropdown({
@@ -39,7 +39,10 @@ export default function UserDropdown({
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
           <Avatar>
-            <AvatarImage src="./avatar.jpg" alt="Profile image" />
+            <AvatarImage
+              src={image ?? `https://avatar.vercel.sh/${email}`}
+              alt="Profile image"
+            />
             <AvatarFallback>{name[0].toUpperCase()}</AvatarFallback>
           </Avatar>
           <ChevronDownIcon
