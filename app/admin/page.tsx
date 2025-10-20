@@ -56,11 +56,13 @@ async function RenderRecentCourses() {
     );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recentCourses.map((course) => (
-        <AdminCourseCard key={course.id} data={course} />
-      ))}
-    </div>
+    <Suspense fallback={<RenderRecentCoursesSkeleton />}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentCourses.map((course) => (
+          <AdminCourseCard key={course.id} data={course} />
+        ))}
+      </div>
+    </Suspense>
   );
 }
 async function RenderRecentCoursesSkeleton() {

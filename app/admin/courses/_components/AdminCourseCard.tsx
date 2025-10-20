@@ -52,7 +52,7 @@ export default function AdminCourseCard({ data }: AdminCourseCardProps) {
             {/* preview course  */}
 
             <DropdownMenuItem asChild>
-              <Link href={`/admin/courses/${data.slug}`}>
+              <Link href={`/courses/${data.slug}`}>
                 <Eye className="size-4 mr-2" />
                 Preview
               </Link>
@@ -82,7 +82,7 @@ export default function AdminCourseCard({ data }: AdminCourseCardProps) {
 
       <CardContent className="p-4">
         <Link
-          href={`/admin/courses/${data.id}`}
+          href={`/courses/${data.slug}`}
           className="font-medium text-lg line-clamp-2 hover:underline group-hover:text-primary transition-colors"
         >
           {data.title}{" "}
