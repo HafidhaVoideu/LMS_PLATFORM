@@ -86,7 +86,7 @@ export default function LoginForm() {
       <CardHeader className="text-xl">
         Welcome back!
         <CardDescription className="">
-          Login with your Github Account or email address
+          Login with your Github, Google Account or email address
         </CardDescription>
       </CardHeader>
 
@@ -123,7 +123,7 @@ export default function LoginForm() {
           ) : (
             <>
               <Inbox className="size-4"></Inbox>
-              sign in with Google
+              sign in with Gmail
             </>
           )}
         </Button>
