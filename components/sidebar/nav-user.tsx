@@ -122,7 +122,7 @@ export function NavUser({}) {
               <DropdownMenuItem asChild>
                 <Link href="/admin">
                   <IconDashboard />
-                  Dashboard
+                  Admin
                 </Link>
               </DropdownMenuItem>
 
@@ -130,6 +130,12 @@ export function NavUser({}) {
                 <Link href="/admin/courses">
                   <IconNotification />
                   Courses
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard">
+                  <IconNotification />
+                  Dashboard
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
