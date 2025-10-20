@@ -82,13 +82,23 @@ export default function UserDropdown({
           </DropdownMenuItem>
 
           <DropdownMenuItem asChild>
-            <Link href="/admin">
+            <Link href="/dashboard">
               <LayoutDashboard
                 size={16}
                 className="opacity-60"
                 aria-hidden="true"
               />
               <span>Dashboard</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href="/admin">
+              <LayoutDashboard
+                size={16}
+                className="opacity-60"
+                aria-hidden="true"
+              />
+              <span>Admin</span>
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

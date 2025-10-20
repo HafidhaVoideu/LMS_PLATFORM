@@ -57,11 +57,26 @@ export async function EditCourse(
       };
     }
 
+    const course = await prisma.course.findUnique({
+      where: { id: courseId },
+    });
+
+    if (!course) {
+      return {
+        status: "error",
+        message: "Course not found.",
+      };
+    }
+
+    if (course.userId !== session?.user.id) {
+      return {
+        status: "error",
+        message: "Not authorized to edit this course.",
+      };
+    }
+
     await prisma.course.update({
-      where: {
-        id: courseId,
-        userId: session?.user.id as string,
-      },
+      where: { id: courseId },
       data: {
         ...validatedData.data,
       },
@@ -70,7 +85,8 @@ export async function EditCourse(
       message: "Course edited successfully",
       status: "success",
     };
-  } catch {
+  } catch (e) {
+    console.error("❌ ERROR in EditCourse:", e);
     return {
       message: "an error has occured",
       status: "error",
