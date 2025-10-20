@@ -19,7 +19,7 @@ export default async function CourseSlugRoute({ params }: CourseLayoutProps) {
       <h2 className="text-2xl font-bold mb-2">No lessons available. </h2>
       <p className="text-muted-foreground">
         {" "}
-        This course doesn't have any lessons yet
+        This course doesn&apos;t have any lessons yet
       </p>
     </div>
   );

@@ -40,7 +40,7 @@ export async function deleteCourse(
       }
     }
 
-    const course = await prisma.course.delete({
+    await prisma.course.delete({
       where: {
         id: courseId,
       },

@@ -1,14 +1,11 @@
+import { EmptyState } from "@/components/general/EmptyState";
 import { ChartAreaInteractive } from "@/components/sidebar/chart-area-interactive";
 import { SectionCards } from "@/components/sidebar/section-cards";
-import { enrollmentStats } from "../data/admin/admin-get-enrollment-stats";
-import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-import { getRecentCourses } from "../data/admin/admin-get-recent-courses";
-import { PublicCourseCard } from "../(public)/_components/PublicCourseCard";
+import Link from "next/link";
 import { Suspense } from "react";
-import { RenderedPublicCourseSkeletonLayout } from "../(public)/courses/page";
-import { Empty } from "@/components/ui/empty";
-import { EmptyState } from "@/components/general/EmptyState";
+import { enrollmentStats } from "../data/admin/admin-get-enrollment-stats";
+import { getRecentCourses } from "../data/admin/admin-get-recent-courses";
 import AdminCourseCard, {
   AdminCourseCardSkeleton,
 } from "./courses/_components/AdminCourseCard";

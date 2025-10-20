@@ -33,10 +33,10 @@ export default function LoginForm() {
         provider: "github",
         callbackURL: "/",
         fetchOptions: {
-          onSuccess: (res) => {
+          onSuccess: () => {
             toast.success("Signed in successfully! You will be redirected...");
           },
-          onError: (error) => {
+          onError: () => {
             toast.error("internal server error: ");
           },
         },
@@ -49,10 +49,10 @@ export default function LoginForm() {
         provider: "google",
         callbackURL: "/",
         fetchOptions: {
-          onSuccess: (res) => {
+          onSuccess: () => {
             toast.success("Signed in successfully! You will be redirected...");
           },
-          onError: (error) => {
+          onError: () => {
             toast.error("internal server error: ");
           },
         },
@@ -73,7 +73,7 @@ export default function LoginForm() {
             router.push(`/verify-request?email=${email}`);
           },
 
-          onError: (error) => {
+          onError: () => {
             toast.error("internal server error: ");
           },
         },

@@ -11,9 +11,9 @@ import Link from "next/link";
 
 export default function Home() {
   interface FeaturesType {
-    title: String;
-    description: String;
-    icon: String;
+    title: string;
+    description: string;
+    icon: string;
   }
   const FEATURES: FeaturesType[] = [
     {

@@ -45,7 +45,7 @@ export async function POST(req: Request) {
         { error: "File validation has failed" },
         { status: 400 }
       );
-    const { fileName, contentType, size, isImage } = validatedFile.data;
+    const { fileName, contentType, size } = validatedFile.data;
 
     const uniqueKey = `${uuidv4()}-${fileName}`;
 

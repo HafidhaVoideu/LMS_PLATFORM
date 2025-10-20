@@ -37,7 +37,9 @@ export default async function EditCoursePage({ params }: { params: Params }) {
             <CardHeader>
               <CardTitle>Basic Info</CardTitle>
 
-              <CardDescription>Edit the course's basic info</CardDescription>
+              <CardDescription>
+                Edit the course&apos;s basic info
+              </CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -52,7 +54,9 @@ export default async function EditCoursePage({ params }: { params: Params }) {
             <CardHeader>
               <CardTitle>Course Structure</CardTitle>
 
-              <CardDescription>Update the course's structure</CardDescription>
+              <CardDescription>
+                Update the course&apos;s structure
+              </CardDescription>
             </CardHeader>
 
             <CardContent>

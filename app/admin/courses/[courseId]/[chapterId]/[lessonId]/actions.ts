@@ -48,7 +48,7 @@ export async function updateLesson(
       };
     }
 
-    const dataPrisma = await prisma.lesson.update({
+    await prisma.lesson.update({
       where: {
         id: lessonId,
       },
@@ -64,7 +64,7 @@ export async function updateLesson(
       status: "success",
       message: "lesson updated successfully",
     };
-  } catch (e) {
+  } catch {
     return {
       status: "error",
       message: "error validating data",

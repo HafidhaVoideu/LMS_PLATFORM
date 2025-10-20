@@ -1,11 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-
-import { type JSONContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import { generateHTML } from "@tiptap/react";
 import parse from "html-react-parser";
 
 export default function RenderDescription({ html }: { html: string }) {

@@ -115,4 +115,3 @@ export default function NewLessonModal({
     </Dialog>
   );
 }
-``;

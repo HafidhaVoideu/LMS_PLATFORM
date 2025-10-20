@@ -3,8 +3,8 @@ import RenderDescription from "@/components/rich-text-editor/RenderDescriiption"
 import { Badge } from "@/components/ui/badge";
 import {
   Collapsible,
-  CollapsibleTrigger,
   CollapsibleContent,
+  CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Separator } from "@/components/ui/separator";
 import { env } from "@/lib/env";
@@ -18,11 +18,10 @@ import {
 import Image from "next/image";
 type params = Promise<{ slug: string }>;
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { checkIfCourseIsBought } from "@/app/data/user/user-is-enriolled";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckIcon } from "lucide-react";
-import { enrollInCourseAction } from "./action";
-import { checkIfCourseIsBought } from "@/app/data/user/user-is-enriolled";
 import Link from "next/link";
 import EnrolmentButton from "./_components/EnrolmentButton";
 export default async function SlugPage({ params }: { params: params }) {

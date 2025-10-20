@@ -1,7 +1,8 @@
-import { Tooltip, TooltipTrigger, TooltipProvider } from "../ui/tooltip";
 import { type Editor } from "@tiptap/react";
 import { Toggle } from "../ui/toggle";
+import { Tooltip, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
+import { cn } from "@/lib/utils";
 import {
   AlignCenter,
   AlignLeft,
@@ -10,7 +11,6 @@ import {
   Heading1Icon,
   Heading2Icon,
   Heading3Icon,
-  HeadingIcon,
   Italic,
   ListIcon,
   ListOrdered,
@@ -18,16 +18,14 @@ import {
   Strikethrough,
   Undo,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { TooltipContent } from "../ui/tooltip";
 import { Button } from "../ui/button";
+import { TooltipContent } from "../ui/tooltip";
 interface MenubarProps {
   editor: Editor | null;
 }
 export default function MenuBar({ editor }: MenubarProps) {
   if (!editor) return null;
 
-  );
   return (
     <div className="border border-input  border-t-0 border-x-0 rounded-t-lg  p-2 bg-card flex flex-wrap items-center gap-1 ">
       <TooltipProvider>

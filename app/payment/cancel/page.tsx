@@ -1,6 +1,6 @@
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, ArrowLeftIcon, XIcon } from "lucide-react";
+import { ArrowLeftIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 
 export default function PaymentCancelled() {
@@ -16,7 +16,7 @@ export default function PaymentCancelled() {
             <h2 className="text-xl font-semibold">Payment Cancelled</h2>
 
             <p className="text-sm mt-2 text-muted-foreground tracking-light text-balance">
-              Don't worry, you won't be charged. Please try again !
+              Don&apos;t worry, you won&apos;t be charged. Please try again !
             </p>
 
             <Link

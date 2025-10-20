@@ -22,8 +22,8 @@ import Link from "next/link";
 import { useSignout } from "@/hooks/use-signout";
 
 interface UserdropdownProps {
-  name: String;
-  email: String;
+  name: string;
+  email: string;
   image: string;
 }
 

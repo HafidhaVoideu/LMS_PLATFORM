@@ -35,14 +35,13 @@ import {
   ChevronRight,
   FileText,
   GripVertical,
-  Trash2,
 } from "lucide-react";
 import Link from "next/link";
 import { reorderChapters, reorderLessons } from "../actions";
+import DeleteChapter from "./DeleteChapter";
+import DeleteLesson from "./DeleteLesson";
 import NewChapterModal from "./NewChapterModal";
 import NewLessonModal from "./NewLessonModal";
-import DeleteLesson from "./DeleteLesson";
-import DeleteChapter from "./DeleteChapter";
 interface EditCoutseStructureProps {
   data: AdminSingleCourseType;
 }
@@ -61,8 +60,6 @@ interface SortableItemProps {
 export default function EditCourseStructure({
   data,
 }: EditCoutseStructureProps) {
-  const [activeId, setActiveId] = useState(null);
-
   const initialItems =
     data.chapters.map((chapter) => ({
       id: chapter.id,
@@ -188,7 +185,7 @@ export default function EditCourseStructure({
             throw new Error("Cahpters could not be reordered!");
           },
 
-          error: (err) => {
+          error: () => {
             setItems(previousChapter);
             return "Cahpters could not be reordered!";
           },
@@ -271,7 +268,7 @@ export default function EditCourseStructure({
             throw new Error("Lessons could not be reordered!");
           },
 
-          error: (err) => {
+          error: () => {
             setItems(previousItems);
             return "Lessons could not be reordered!";
           },

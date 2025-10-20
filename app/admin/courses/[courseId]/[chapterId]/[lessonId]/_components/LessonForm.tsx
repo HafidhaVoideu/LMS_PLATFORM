@@ -11,12 +11,12 @@ import {
 } from "@/components/ui/card";
 import { lessonSchema, LessonSchemaType } from "@/lib/zodSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Arrow } from "@radix-ui/react-select";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 
-import { toast } from "sonner";
+import Uploader from "@/components/file-uploader/Uploader";
+import RichTextEditor from "@/components/rich-text-editor/Editor";
 import {
   Form,
   FormControl,
@@ -25,12 +25,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { useTransition } from "react";
 import { Input } from "@/components/ui/input";
-import RichTextEditor from "@/components/rich-text-editor/Editor";
-import Uploader from "@/components/file-uploader/Uploader";
-import { updateLesson } from "../actions";
 import { tryCatch } from "@/hooks/use-try-catch";
+import { useTransition } from "react";
+import { toast } from "sonner";
+import { updateLesson } from "../actions";
 interface LessonFormProps {
   data: AdminLessonType;
   chapterId: string;

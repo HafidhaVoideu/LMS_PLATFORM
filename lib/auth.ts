@@ -35,7 +35,7 @@ export const auth = betterAuth({
   ],
 
   hooks: {
-    after: createAuthMiddleware(async (ctx: any) => {
+    after: createAuthMiddleware(async (ctx) => {
       // ctx.path gives the route, e.g. /sign-up, /sign-in, etc.
       const newSession = ctx.context.newSession;
       if (newSession?.user) {
@@ -44,7 +44,7 @@ export const auth = betterAuth({
             where: { id: newSession.user.id },
             data: { role: "admin" },
           });
-        } catch (err) {}
+        } catch {}
       }
     }),
   },

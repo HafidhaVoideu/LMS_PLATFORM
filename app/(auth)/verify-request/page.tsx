@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useState, useTransition } from "react";
+import { Suspense, useState, useTransition } from "react";
 
 import { Card } from "@/components/ui/card";
 import {
@@ -22,7 +22,14 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader } from "lucide-react";
 
-export default function VerifyRequestPage() {
+export default function SuspenseVerifyRequestPage() {
+  return (
+    <Suspense>
+      <VerifyRequestPage />
+    </Suspense>
+  );
+}
+function VerifyRequestPage() {
   const [opt, setOpt] = useState("");
   const [isEmailVeirifcationPending, startEmailVerificationTransition] =
     useTransition();
@@ -49,7 +56,7 @@ export default function VerifyRequestPage() {
               router.push("/");
             },
 
-          onError: (error) => {
+          onError: () => {
             toast.error("Failed to verify email. Please try again.");
           },
         },

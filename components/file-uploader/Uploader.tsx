@@ -1,20 +1,19 @@
 "use client";
-import { FileRejection, useDropzone } from "react-dropzone";
 import { useCallback, useEffect, useState } from "react";
+import { FileRejection, useDropzone } from "react-dropzone";
 import { Card, CardContent } from "../ui/card";
 
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import {
   RenderEmptyState,
   RenderErrorState,
   RenderUploaedState,
   RenderUploafingState,
 } from "./RenderState";
-import { toast } from "sonner";
 
-import { v4 as uuidv4 } from "uuid";
 import { useConstructUrl } from "@/hooks/use-construct-url";
-import { file } from "zod";
+import { v4 as uuidv4 } from "uuid";
 
 interface UploaderType {
   id: string | null;
@@ -155,7 +154,7 @@ export default function Uploader({
           xhr.setRequestHeader("Content-Type", file.type);
           xhr.send(file);
         });
-      } catch (e) {
+      } catch {
         toast.error("Error uploading file");
 
         setFileState((prev) => ({
@@ -241,7 +240,7 @@ export default function Uploader({
 
       onChange?.("");
 
-      setFileState((prev) => ({
+      setFileState(() => ({
         id: null,
         file: null,
         uploading: false,
@@ -253,7 +252,7 @@ export default function Uploader({
       }));
 
       toast.success("File deleted successfully");
-    } catch (e) {
+    } catch {
       toast.error("Error deleting file");
       setFileState((prev) => ({
         ...prev,

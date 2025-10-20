@@ -1,22 +1,21 @@
 "use client";
 import {
   AlertDialog,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTrigger,
   AlertDialogTitle,
-  AlertDialogCancel,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { tryCatch } from "@/hooks/use-try-catch";
 import { Trash2 } from "lucide-react";
 import { useState, useTransition } from "react";
-import { deleteChapter, deleteLesson } from "../actions";
+import { deleteChapter } from "../actions";
 
 import { toast } from "sonner";
-import { set } from "zod";
 
 export default function DeleteChapter({
   courseId,

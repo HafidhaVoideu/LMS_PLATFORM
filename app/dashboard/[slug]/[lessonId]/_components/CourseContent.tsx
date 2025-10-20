@@ -4,12 +4,12 @@ import RenderDescription from "@/components/rich-text-editor/RenderDescriiption"
 import { Button } from "@/components/ui/button";
 import { useConstructUrl } from "@/hooks/use-construct-url";
 import { tryCatch } from "@/hooks/use-try-catch";
-import { BookIcon, CheckCircle, Loader, Loader2 } from "lucide-react";
-import { useState, useTransition } from "react";
+import { BookIcon, CheckCircle } from "lucide-react";
+import { useTransition } from "react";
 import { markLessonComplete } from "../action";
 
-import { toast } from "sonner";
 import { useConfetti } from "@/hooks/use-conffeti";
+import { toast } from "sonner";
 
 interface CourseConentProps {
   data: LessonContentType;
@@ -32,7 +32,7 @@ function VideoPlayer({
         <BookIcon className="size-16 text-primary mb-4 mx-auto"></BookIcon>
 
         <p className="text-muted-foreground">
-          This lesson doesn't have a video yet.
+          This lesson doesn&apos;t have a video yet.
         </p>
       </div>
     );
@@ -47,7 +47,7 @@ function VideoPlayer({
         <source src={videoUrl} type="video/mp4" />
         <source src={videoUrl} type="video/ogg" />
         <source src={videoUrl} type="video/webm" />
-        Your borwser doesn't supportthe video tag.
+        Your borwser doesn&apos;t supportthe video tag.
       </video>
     </div>
   );
@@ -55,7 +55,6 @@ function VideoPlayer({
 export function CourseConent({ data }: CourseConentProps) {
   const [pendingProgress, startProgressTransition] = useTransition();
 
-  const [status, setStatus] = useState("Mark as complete");
   const { triggerConfetti } = useConfetti();
 
   async function onSubmit() {
@@ -73,7 +72,6 @@ export function CourseConent({ data }: CourseConentProps) {
       } else if (result?.status === "success") {
         triggerConfetti();
 
-        setStatus("completed");
         toast.success(result.message);
       }
     });
