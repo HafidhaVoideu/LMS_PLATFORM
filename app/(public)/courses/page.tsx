@@ -5,7 +5,7 @@ import {
 } from "../_components/PublicCourseCard";
 import { Suspense } from "react";
 
-export const dynamic = "force-static";
+// export const dynamic = "force-static";
 export default async function PublicCoursesPage() {
   return (
     <div className="mt-4">
